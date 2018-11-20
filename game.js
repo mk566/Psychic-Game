@@ -11,9 +11,9 @@ var guessessofar = [];
 
 // run when the user presses and lets go of a key:
 var computerChoice = letters[Math.floor(Math.random() * letters.length)];
-console.log("This is computer's choice: " , computerChoice);;
+console.log("This is computer's choice: ", computerChoice);;
 
-        // Linking of variables to the html id's:
+// Linking of variables to the html id's:
 
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
@@ -25,23 +25,30 @@ document.onkeyup = function (event) {
     // Gathers users keycode as well as makes it a string:
 
     // var playerGuess = String.fromCharCode(Event.keycode).toLocaleLowerCase()
-   
+
     var playerGuess = event.key.toLocaleLowerCase();
-    console.log("This is Users choice" , playerGuess);
+    console.log("This is Users choice", playerGuess);
 
     // tells the computer to select random letter from var Letters:
 
     // Comparison between the computer and user guess to determine Wins and losses:
 
-    if (playerGuess < 1) {
+    if (playerGuess != computerChoice) {
         losses++;
-        guessesavailable = 9;
+        // guessesavailable = 9;
         guessessofar = [];
+
+        if (guessesavailable > 0) {
+            guessesavailable--;
+        } else {
+            alert("No soup for you!")
+        }
+
 
     }
 
     if (playerGuess === computerChoice) {
-       console.log("Match!");
+        console.log("Match!");
         wins++;
     }
 
@@ -49,13 +56,13 @@ document.onkeyup = function (event) {
     else {
         console.log("NO SOUP FOR YOU!!");
         guessessofar.push(playerGuess);
-        guessesavailable--;
+
     }
 
-// Uses variables to replace the text content:
+    // Uses variables to replace the text content:
 
-winsText.textContent = "Wins: " + wins;
-lossesText.textContent = "Losses: " + losses;
-guessesavailableText.textContent = "Attempts left: " + guessesavailable;
-guessessoFarText.textContent = "Guesses so far: " + guessessofar;
+    winsText.textContent = "Wins: " + wins;
+    lossesText.textContent = "Losses: " + losses;
+    guessesavailableText.textContent = "Attempts left: " + guessesavailable;
+    guessessoFarText.textContent = "Guesses so far: " + guessessofar;
 }
